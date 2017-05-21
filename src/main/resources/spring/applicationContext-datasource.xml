@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="dataSourceParent" abstract="true">
+        <property name="initialSize" value="${dataSource.initialSize}"/>
+        <property name="minIdle" value="${dataSource.minIdle}"/>
+        <property name="maxActive" value="${dataSource.maxActive}"/>
+        <property name="poolPreparedStatements" value="${dataSource.poolPreparedStatements}"/>
+    </bean>
+
+
+    <bean id="masterDataSource" parent="dataSourceParent"
+          class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <property name="name" value="master"/>
+        <property name="driverClassName" value="${dataSource.master.driverClassName}"/>
+        <property name="url" value="${dataSource.master.url}"/>
+        <property name="username" value="${dataSource.master.username}"/>
+        <property name="password" value="${dataSource.master.password}"/>
+        <!-- <property name="filters" value="slf4j" /> -->
+        <!--<property name="proxyFilters">-->
+        <!--<list>-->
+        <!--<ref bean="stat-filter" />-->
+        <!--</list>-->
+        <!--</property>-->
+    </bean>
+    <bean id="slaveDataSource" parent="dataSourceParent"
+          class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+          destroy-method="close">
+        <property name="name" value="slave"/>
+        <property name="driverClassName" value="${dataSource.slave.driverClassName}"/>
+        <property name="url" value="${dataSource.slave.url}"/>
+        <property name="username" value="${dataSource.slave.username}"/>
+        <property name="password" value="${dataSource.slave.password}"/>
+        <!-- <property name="filters" value="slf4j" /> -->
+        <!--<property name="proxyFilters">-->
+        <!--<list>-->
+        <!--<ref bean="stat-filter" />-->
+        <!--</list>-->
+        <!--</property>-->
+    </bean>
+
+
+</beans>

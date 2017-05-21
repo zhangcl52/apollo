@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hunter.sys.dao.SysMenuDao">
+
+    <resultMap id="allResultMap" type="com.hunter.sys.entity.SysMenu">
+        <id property="id" column="id"/>
+
+        <result property="parentId" column="parent_id"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="url" column="url"/>
+        <result property="icon" column="icon"/>
+        <result property="menuOrder" column="menu_order"/>
+        <result property="remark1" column="remark1"/>
+        <result property="remark2" column="remark2"/>
+
+        <result property="isDel" column="is_del"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createName" column="create_name"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="modifyName" column="modify_name"/>
+
+    </resultMap>
+    <sql id="tableColumn">
+        (parent_id,name,code,url,icon,menu_order,remark1,remark2,is_del,create_time,create_name,modify_time,modify_name)
+    </sql>
+
+    <sql id="beanProperty">
+        (#{parentId},#{name},${code},#{url},#{icon},#{menuOrder},#{remark1},#{remark2},#{isDel},#{createTime},#{createName}
+        ,#{modifyTime},#{modifyName})
+    </sql>
+
+
+    <!--增加数据-->
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id" parameterType="com.hunter.sys.entity.SysMenu">
+        insert into sys_menu
+        <include refid="tableColumn"></include>
+        VALUES
+        <include refid="beanProperty"></include>
+    </insert>
+
+    <!--修改-->
+    <update id="updateByEntity" parameterType="com.hunter.sys.entity.SysMenu">
+        update sys_menu
+        <set>
+            <if test="parentId !=null">parent_id = #{parentId},</if>
+            <if test="name !=null">name = #{name},</if>
+            <if test="code !=null">code = #{code},</if>
+            <if test="url !=null">url = #{url},</if>
+            <if test="icon !=null">icon  = #{icon},</if>
+            <if test="menuOrder !=null">menu_order = #{menuOrder},</if>
+            <if test="remark1 !=null">remark1 = #{remark1},</if>
+            <if test="remark2 !=null">remark2 = #{remark2},</if>
+
+            <if test="isDel !=null">is_del = #{isDel},</if>
+            <if test="createTime !=null">create_time = #{createTime},</if>
+            <if test="createName !=null">create_name = #{createName},</if>
+            <if test="modifyTime !=null">modify_time = #{modifyTime},</if>
+            <if test="modifyName !=null">modify_name = #{modifyName}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+</mapper>

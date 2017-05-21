@@ -1,0 +1,1 @@
+package com.hunter.sys.dao;import com.hunter.base.dao.BaseDao;import com.hunter.sys.entity.SysRandomNumber;import org.springframework.stereotype.Repository;/** * @Author zhangcl * @Date 17/3/8  下午11:43 */@Repositorypublic class SysRandomNumberDao extends BaseDao<SysRandomNumber> {}
