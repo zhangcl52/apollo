@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.hunter.sys.user.dao.SysUserDao">
+    <resultMap id="allResultMap" type="com.hunter.sys.user.entity.SysUser">
+        <id property="id" column="id"/>
+
+        <result property="name" column="name"/>
+        <result property="userType" column="user_type"/>
+        <result property="userAccount" column="user_account"/>
+        <result property="password" column="password"/>
+        <result property="phone" column="phone"/>
+        <result property="balance" column="balance"/>
+
+        <result property="hasDel" column="has_del"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createName" column="create_name"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="modifyName" column="modify_name"/>
+    </resultMap>
+    <sql id="tableColumn">
+        (name,user_type,user_account,password,phone,balance,has_del,create_time,create_name,modify_time,modify_name)
+    </sql>
+
+    <sql id="beanProperty">
+        (#{name},#{userType},#{userAccount},#{password},#{phone},#{balance},#{hasDel},#{createTime},#{createName}
+        ,#{modifyTime},#{modifyName})
+    </sql>
+
+
+    <!--增加数据-->
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id" parameterType="com.hunter.sys.user.entity.SysUser">
+        insert into p_user
+        <include refid="tableColumn"></include>
+        VALUES
+        <include refid="beanProperty"></include>
+    </insert>
+
+
+    <!--删除-->
+    <delete id="deleteById">
+        delete from p_user where id=#{id}
+    </delete>
+    <delete id="deleteByEntity" parameterType="com.hunter.sys.user.entity.SysUser">
+        delete from p_user where id=#{id}
+    </delete>
+
+
+    <!--修改-->
+    <update id="updateByEntity" parameterType="com.hunter.sys.user.entity.SysUser">
+        update p_user
+        <set>
+            <if test="name !=null">name = #{name},</if>
+            <if test="userType !=null">name = #{userType},</if>
+            <if test="userAccount !=null">name = #{userAccount},</if>
+            <if test="password !=null">password = #{password},</if>
+            <if test="phone !=null">phone = #{phone},</if>
+            <if test="balance !=null">email = #{balance},</if>
+
+            <if test="hasDel !=null">has_del = #{hasDel},</if>
+            <if test="createTime !=null">create_time = #{createTime},</if>
+            <if test="createName !=null">create_name = #{createName},</if>
+            <if test="modifyTime !=null">modify_time = #{modifyTime},</if>
+            <if test="modifyName !=null">modify_name = #{modifyName}</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <!--查询-->
+    <select id="findAll" resultMap="allResultMap">
+        select * from p_user where has_del=0 order by create_time desc
+    </select>
+
+    <select id="findOneById" resultMap="allResultMap">
+        select * from p_user where has_del=0 and id=#{id}
+    </select>
+
+    <select id="findListByMap" parameterType="map" resultMap="allResultMap">
+        select * from p_user where has_del=0
+        <foreach collection="paraMap" item="value" index="key">
+            <if test="key=='name' and value !=null and value != '' ">and name like concat('%',trim(#{value}),'%')</if>
+            <if test="key=='phone' and value!=null and value!=''">and phone like concat('%',trim(#{value}),'%')</if>
+            <if test="key=='userType' and value !=null and value != '' ">and user_type =trim(#{value})</if>
+        </foreach>
+        order by create_time desc
+    </select>
+
+</mapper>

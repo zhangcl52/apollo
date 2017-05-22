@@ -5,7 +5,7 @@
 %>
 <!DOCTYPE html>
 <head>
-    <title>hunter管理平台</title>
+    <title>游戏管理平台</title>
     <link rel="stylesheet" href="css/bootstrap.css"/>
 
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>

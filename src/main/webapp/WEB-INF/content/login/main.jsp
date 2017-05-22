@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <%@ include file="../sys/common/common.jsp"%>
+    <%@ include file="../sys/common/common.jsp" %>
     <title>hunter管理平台</title>
     <link rel="stylesheet" href="${path}/css/css.css"/>
     <script type="text/javascript" src="${path}/js/sdmenu.js"></script>
@@ -13,7 +13,7 @@
 <!--顶部开始-->
 <div class="header">
     <%--<div class="logo"><img src="/img/logo.png"/></div>--%>
-        <div class="logo"><img src=""/></div>
+    <div class="logo"><img src=""/></div>
     <div class="header-right">
         <i class="icon-question-sign icon-white"></i> <a href="#">帮助</a> <i class="icon-off icon-white"></i> <a
             id="modal-973558" href="#modal-container-973558" role="button" data-toggle="modal">注销</a> <i
@@ -53,14 +53,10 @@
         </script>
 
         <div id="my_menu" class="sdmenu">
-            <c:forEach var="menu" items="${menuList}" varStatus="status">
-                <div>
-                    <span>${menu.name}</span>
-                    <c:forEach var="childMenu" items="${menu.childMenu}" varStatus="childStatus">
-                        <a href="#" dateUrl="${path}/${childMenu.url}" id="menu_${status.index}_${childStatus.index}" onclick="getPage('menu_${status.index}_${childStatus.index}')">${childMenu.name}</a>
-                    </c:forEach>
-                </div>
-            </c:forEach>
+            <div>
+                <span>用户管理</span>
+                <a href="#" dateUrl="${path}/sys/user/list.do" id="menu_1_1" onclick="getPage('menu_1_1')">用户管理</a>
+            </div>
         </div>
     </div>
     <div class="Switch"></div>
@@ -75,8 +71,8 @@
     <%--右侧内容--%>
     <div class="right" id="mainFrame">
         <div class="right_cont">
-            <iframe src="${path}/sys/login/getHomePage.do"  marginheight="0" marginwidth="0" frameborder="0"
-                     width="100%" height="100%"
+            <iframe src="${path}/sys/login/getHomePage.do" marginheight="0" marginwidth="0" frameborder="0"
+                    width="100%" height="100%"
                     id="iframepage" name="iframepage" onLoad="iFrameHeight()">
             </iframe>
 
@@ -104,26 +100,26 @@
             ifm.height = subWeb.body.scrollHeight;
         }
     }
-    function getPage(menuId){
-        var _menu = $("#"+menuId);
+    function getPage(menuId) {
+        var _menu = $("#" + menuId);
         $("a").each(function () {
             $(this).removeAttr("class");
         });
-        _menu.attr("class","current");
-        var pageUrl=_menu.attr("dateUrl");
-        var ifm=$("#iframepage");
-        ifm.attr("src",pageUrl);
+        _menu.attr("class", "current");
+        var pageUrl = _menu.attr("dateUrl");
+        var ifm = $("#iframepage");
+        ifm.attr("src", pageUrl);
 
     }
     //将菜单折叠起来(还需要调试)
-//    $(document).ready(function () {
-//        var myMenuDiv=$("#my_menu");
-//        var childDiv=myMenuDiv.children("div");
-//        childDiv.each(function () {
-//            $(this).attr("class","collapsed");
-//        });
-//
-//    });
+    //    $(document).ready(function () {
+    //        var myMenuDiv=$("#my_menu");
+    //        var childDiv=myMenuDiv.children("div");
+    //        childDiv.each(function () {
+    //            $(this).attr("class","collapsed");
+    //        });
+    //
+    //    });
 </script>
 </body>
 </html>
