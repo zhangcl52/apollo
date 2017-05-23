@@ -7,6 +7,8 @@
         <id property="id" column="id"/>
 
         <result property="name" column="name"/>
+        <result property="uid" column="uid"/>
+        <result property="userIcon" column="user_icon"/>
         <result property="userType" column="user_type"/>
         <result property="userAccount" column="user_account"/>
         <result property="password" column="password"/>
@@ -20,11 +22,11 @@
         <result property="modifyName" column="modify_name"/>
     </resultMap>
     <sql id="tableColumn">
-        (name,user_type,user_account,password,phone,balance,has_del,create_time,create_name,modify_time,modify_name)
+        (name,uid,user_icon,user_type,user_account,password,phone,balance,has_del,create_time,create_name,modify_time,modify_name)
     </sql>
 
     <sql id="beanProperty">
-        (#{name},#{userType},#{userAccount},#{password},#{phone},#{balance},#{hasDel},#{createTime},#{createName}
+        (#{name},#{uid},#{userIcon},#{userType},#{userAccount},#{password},#{phone},#{balance},#{hasDel},#{createTime},#{createName}
         ,#{modifyTime},#{modifyName})
     </sql>
 
@@ -52,8 +54,10 @@
         update p_user
         <set>
             <if test="name !=null">name = #{name},</if>
-            <if test="userType !=null">name = #{userType},</if>
-            <if test="userAccount !=null">name = #{userAccount},</if>
+            <if test="uid !=null">uid = #{uid},</if>
+            <if test="userIcon !=null">user_icon = #{userIcon},</if>
+            <if test="userType !=null">user_type = #{userType},</if>
+            <if test="userAccount !=null">user_account = #{userAccount},</if>
             <if test="password !=null">password = #{password},</if>
             <if test="phone !=null">phone = #{phone},</if>
             <if test="balance !=null">email = #{balance},</if>
@@ -81,7 +85,7 @@
         <foreach collection="paraMap" item="value" index="key">
             <if test="key=='name' and value !=null and value != '' ">and name like concat('%',trim(#{value}),'%')</if>
             <if test="key=='phone' and value!=null and value!=''">and phone like concat('%',trim(#{value}),'%')</if>
-            <if test="key=='userType' and value !=null and value != '' ">and user_type =trim(#{value})</if>
+            <if test="key=='userType' and value !=null and value != '' and value!=-1">and user_type =trim(#{value})</if>
         </foreach>
         order by create_time desc
     </select>

@@ -9,7 +9,7 @@
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
 		<property name="mapperLocations">
 			<array>
-				<value>classpath:com/hunter/*/entity/*.xml</value>
+				<value>classpath:com/hunter/sys/*/entity/*.xml</value>
 			</array>
 		</property>
 		<property name="typeAliasesPackage" value="com.isea533.mybatis.model"/>
@@ -37,7 +37,7 @@
 		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml"/>
 		<property name="mapperLocations">
 			<array>
-				<value>classpath:com/hunter/*/entity/*.xml</value>
+				<value>classpath:com/hunter/sys/*/entity/*.xml</value>
 			</array>
 		</property>
 		<property name="typeAliasesPackage" value="com.isea533.mybatis.model"/>
@@ -65,7 +65,7 @@
 	<!--可以把扫描到的Mapper接口变成Mapper对象-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!--指定要扫描包： 多个包用逗号隔开 -->
-		<property name="basePackage" value="com.hunter.sys.mapper" />
+		<property name="basePackage" value="com.hunter.sys.user.mapper" />
 		<!--指定sqlSessionFactory -->
 		<property name="sqlSessionTemplateBeanName" value="masterSqlSessionTemplate"></property>
 	</bean>
