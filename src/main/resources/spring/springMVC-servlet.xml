@@ -20,6 +20,14 @@
     <!-- 支持异步方法执行 -->
     <task:annotation-driven/>
 
+    <!--拦截器-->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.hunter.base.interceptor.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!-- 视图解析器和json解析器 -->
     <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
         <property name="viewResolvers">
@@ -63,6 +71,5 @@
         <!-- 是上传文件的大小，单位为字节 -->
         <property name="maxUploadSize" value="5242880"/>
     </bean>
-
 
 </beans>

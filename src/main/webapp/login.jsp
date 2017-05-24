@@ -26,9 +26,9 @@
 
         .login-wrap {
             width: 220px;
-            padding: 30px 50px 0 330px;
+            /*padding: 30px 50px 0 330px;*/
             height: 220px;
-            background: #fff url(img/login_bg_HZ.png) no-repeat 30px 40px;
+            /*background: #fff url(img/login_bg_HZ.png) no-repeat 30px 40px;*/
             margin: auto;
             overflow: hidden;
         }
@@ -39,12 +39,12 @@
         }
 
         .login_user {
-            background: url(img/input_icon_1.png) no-repeat 200px center;
+            background: url(img/input_icon_1.png) no-repeat 190px center;
             font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
         }
 
         .login_password {
-            background: url(img/input_icon_2.png) no-repeat 200px center;
+            background: url(img/input_icon_2.png) no-repeat 190px center;
             font-family: "Courier New", Courier, monospace
         }
 
@@ -91,27 +91,30 @@
 
 <body>
 <div class="tit"><img src="img/tit1.png" alt=""/></div>
-<form action="${path}/sys/login/login.do" id="_form" method="post">
+<form action="" id="_form" method="post">
     <div class="login-wrap">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-                <td height="25" valign="bottom">用户名：</td>
+                <td height="25" valign="bottom">手机号：</td>
             </tr>
             <tr>
-                <td><input name="username" type="text" class="login_input login_user" value=""/></td>
+                <td><input name="phone" id="phone" type="text" class="login_input login_user" value=""/></td>
             </tr>
             <tr>
                 <td height="35" valign="bottom">密 码：</td>
             </tr>
             <tr>
-                <td><input name="password" type="password" class="login_input login_password" value=""/></td>
-            </tr>
-            <tr>
-                <td height="60" valign="bottom"><a class="btn btn-block btn-login" onclick="submitForm()"
-                >登录</a>
+                <td><input name="password" id="password" type="password" class="login_input login_password" value=""/>
                 </td>
             </tr>
-
+            <tr>
+                <td height="60" valign="bottom"><a class="btn btn-block btn-login" onclick="submitForm()">登录</a>
+                </td>
+            </tr>
+            <tr>
+                <td height="30" valign="bottom"><a style="color:red" id="messageInfo"></a>
+                </td>
+            </tr>
         </table>
     </div>
 </form>
@@ -119,8 +122,44 @@
 </body>
 <script>
     function submitForm() {
-        var _form=$("#_form");
-        _form.submit();
+        var phone = $("#phone").val().trim();
+        var password = $("#password").val();
+        //ajax 登录
+        if (validate(phone, password)) {
+            $.ajax({
+                url: '${path}/sys/login/login.do',
+                type: 'post',
+                async: false,//是否异步
+                data: {
+                    phone: phone,
+                    password: password
+                },
+                timeout: 5000,
+                dataType: 'json',
+                success: function (data) {
+                    var code = data.code;
+                    var message = data.message;
+                    if (code == '2000') {
+                        location.href="${path}/sys/login/getMainPage.do";
+                    } else {
+                        $("#messageInfo").text(message);
+                    }
+                }
+            });
+        }
+
+    }
+
+    function validate(phone, password) {
+        if (phone == "") {
+            $("#messageInfo").text("手机号不能为空");
+            return false;
+        }
+        if (password == "") {
+            $("#messageInfo").text("密码不能为空");
+            return false;
+        }
+        return true;
     }
 
 

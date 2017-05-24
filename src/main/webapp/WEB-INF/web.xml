@@ -83,6 +83,8 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>*.do</url-pattern>
     </servlet-mapping>
+
+
     <!--spring mvc end-->
 
 </web-app>

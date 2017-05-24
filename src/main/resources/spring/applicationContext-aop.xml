@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-                           http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!--  采用基于 AspectJ的AOP取代默认的动态代理的AOP机制,避免this引用问题 -->
-    <!--<aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>-->
-	
-</beans>
