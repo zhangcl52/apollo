@@ -6,19 +6,20 @@
 <!DOCTYPE html>
 <head>
     <title>游戏管理平台</title>
-    <link rel="stylesheet" href="css/bootstrap.css"/>
+    <link rel="stylesheet" href="../../css/bootstrap.css"/>
 
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../../js/md5.js"></script>
 
     <style type="text/css">
         body {
-            background: #0066A8 url(img/login_bg.png) no-repeat center 0px;
+            background: #0066A8 url(../../img/login_bg.png) no-repeat center 0px;
         }
 
         .tit {
             margin: auto;
-            margin-top: 170px;
+            margin-top: 100px;
             text-align: center;
             width: 350px;
             padding-bottom: 20px;
@@ -39,12 +40,12 @@
         }
 
         .login_user {
-            background: url(img/input_icon_1.png) no-repeat 190px center;
+            background: url(../../img/input_icon_1.png) no-repeat 190px center;
             font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif
         }
 
         .login_password {
-            background: url(img/input_icon_2.png) no-repeat 190px center;
+            background: url(../../img/input_icon_2.png) no-repeat 190px center;
             font-family: "Courier New", Courier, monospace
         }
 
@@ -73,19 +74,19 @@
             color: #CCC
         }
 
-        @media (max-height: 700px) {
-            .tit {
-                margin: auto;
-                margin-top: 100px;
-            }
-        }
+        /*@media (max-height: 700px) {*/
+            /*.tit {*/
+                /*margin: auto;*/
+                /*margin-top: 100px;*/
+            /*}*/
+        /*}*/
 
-        @media (max-height: 500px) {
-            .tit {
-                margin: auto;
-                margin-top: 50px;
-            }
-        }
+        /*@media (max-height: 500px) {*/
+            /*.tit {*/
+                /*margin: auto;*/
+                /*margin-top: 50px;*/
+            /*}*/
+        /*}*/
     </style>
 </head>
 
@@ -124,15 +125,16 @@
     function submitForm() {
         var phone = $("#phone").val().trim();
         var password = $("#password").val();
+        var encryptPwd=calcMD5(calcMD5(password)+phone);
         //ajax 登录
         if (validate(phone, password)) {
             $.ajax({
-                url: '${path}/sys/login/login.do',
+                url: '${path}/sys/login/ajax/login.do',
                 type: 'post',
                 async: false,//是否异步
                 data: {
                     phone: phone,
-                    password: password
+                    password: encryptPwd
                 },
                 timeout: 5000,
                 dataType: 'json',
@@ -140,7 +142,7 @@
                     var code = data.code;
                     var message = data.message;
                     if (code == '2000') {
-                        location.href="${path}/sys/login/getMainPage.do";
+                        location.href="${path}/sys/login/login.do";
                     } else {
                         $("#messageInfo").text(message);
                     }

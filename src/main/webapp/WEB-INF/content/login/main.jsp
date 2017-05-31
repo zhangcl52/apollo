@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <%@ include file="../sys/common/common.jsp" %>
-    <title>hunter管理平台</title>
+    <title>管理平台</title>
     <link rel="stylesheet" href="${path}/css/css.css"/>
     <script type="text/javascript" src="${path}/js/sdmenu.js"></script>
 
@@ -15,10 +15,10 @@
     <%--<div class="logo"><img src="/img/logo.png"/></div>--%>
     <div class="logo"><img src=""/></div>
     <div class="header-right">
-        <i class="icon-question-sign icon-white"></i> <a href="#">帮助</a> <i class="icon-off icon-white"></i> <a
-            id="modal-973558" href="#modal-container-973558" role="button" data-toggle="modal">注销</a> <i
-            class="icon-user icon-white"></i> <a href="#">开票员的工作平台</a> <i class="icon-envelope icon-white"></i> <a
-            href="#">发送短信</a>
+        <i class="icon-off icon-white"></i>
+        <a id="modal-973557" href="#modal-container-973558" role="button" data-toggle="modal" style="font-size: 16px">欢迎 ${user.userAccount}</a>
+        <i class="icon-off icon-white"></i>
+        <a id="modal-973558" href="#modal-container-973558" role="button" data-toggle="modal" style="font-size: 16px">注销</a>
         <div id="modal-container-973558" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel"
              aria-hidden="true" style="width:300px; margin-left:-150px; top:30%">
             <div class="modal-header">
@@ -56,6 +56,10 @@
             <div>
                 <span>用户管理</span>
                 <a href="#" dateUrl="${path}/sys/user/list.do" id="menu_1_1" onclick="getPage('menu_1_1')">用户管理</a>
+            </div>
+            <div>
+                <span>房间管理</span>
+                <a href="#" dateUrl="${path}/sys/room/normal/list.do" id="menu_2_1" onclick="getPage('menu_2_1')">普通房间管理</a>
             </div>
         </div>
     </div>

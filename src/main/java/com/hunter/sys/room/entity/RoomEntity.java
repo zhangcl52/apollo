@@ -1,0 +1,1 @@
+package com.hunter.sys.room.entity;import com.hunter.base.entity.BaseEntity;import lombok.Getter;import lombok.Setter;import lombok.ToString;/** * @Author zhangcl * @Date 17/5/30  下午10:07 */@Getter@Setter@ToStringpublic class RoomEntity extends BaseEntity{    private String roomName;    }
