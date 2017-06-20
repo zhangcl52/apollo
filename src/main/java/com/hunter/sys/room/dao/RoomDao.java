@@ -1,0 +1,1 @@
+package com.hunter.sys.room.dao;import com.hunter.base.dao.BaseDao;import com.hunter.sys.room.entity.RoomEntity;import org.springframework.stereotype.Repository;/** * @Author zhangcl * @Date 17/5/31  上午8:21 */@Repositorypublic class RoomDao extends BaseDao<RoomEntity> {}
